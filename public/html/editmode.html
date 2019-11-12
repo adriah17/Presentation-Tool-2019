@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <title>Pitch'n Edit</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="../css/toolMain.css">
+        <link rel="stylesheet" type="text/css" href="../css/editmodeMain.css">
+        <link rel="stylesheet" type="text/css" href="../css/editmodeSlide.css">
+    </head>
+    <body>
+        <div id="toolBarDiv">
+            
+            <div id="slideTools" class="toolBarCont">
+                <a id="newSlideBtn">+</a>
+            </div>
+
+            <div id="items" class="toolBarCont">
+                <button id="txtFiledBtn">Text Field</button>
+                <button onclick="makeList()">List</button>
+                <input type="file">
+            </div>
+
+            <div id="textEditTools" class="toolBarCont">
+                <select id="fontFamSelect">
+                    <option>Calibri</option>
+                    <option>Helvetica</option>
+                    <option>Times New Roman</option>
+                </select>
+
+                <select id="fontSizeSelect">
+                    <option>12 pt</option>
+                    <option>14 pt</option>
+                    <option>18 pt</option>
+                    <option>24 pt</option>
+                    <option>36 pt</option>
+                    <option>48 pt</option>
+                </select>
+
+                <button class="nbi" style="text-decoration: underline">U</button>
+                <button class="nbi" style="font-weight: bold">B</button>
+                <button class="nbi" style="font-style:italic">I</button>
+
+                <label for="textColorInp">Text Color</label>
+                <input id="textColorInp" type="color" style="width: 50px">
+
+                <button class="lcr" style="border-left: 1px solid black;">L</button>
+                <button class="lcr" style="border-bottom: 1px solid black;">C</button>
+                <button class="lcr" style="border-right: 1px solid black;">R</button>
+            </div>
+
+            <div id="typeOfSlides" class="toolBarCont">
+                <div id="titleSlideBtn">Title</div>
+                <div id="txtAndImageSlideBtn">Text and Image</div>
+                <div id="listSlideBtn">List</div>
+            </div>
+
+            <div id="setSlidebackgroundDiv" class="toolBarCont">
+                    <label for="backgroundColorInp">Background Color</label>
+                    <input id="backgroundColorInp" type="color" style="width: 50px">
+                    <br>
+                    <label for="backgroundImgInp">Image</label>
+                    <input id="backgroundImgInp" type="file">
+            </div>
+
+            <div id="navBtnsCont" class="toolBarCont"> 
+                <button id="saveBtn" style="background-color: #2f71e3; border-color: #2f71e3">Save</button>
+                <button id="backBtn">Back</button>
+            </div>
+            
+        </div>
+
+        <div id="underToolBarDiv">
+
+            <div id="allSlidesPreviewCont">
+                <!-- Here goes all the slidepreviews, JavaScript -->   
+            </div>
+
+            <div id="editSlideCont">
+                <!-- Here goes the code to edit a slide, JavaScript -->
+            </div>
+
+        </div>
+
+        <template id="titleSlide">
+            <div class="titleSlideContainerDiv">
+                <div class="titleFrame" contenteditable="true"></div>
+                <div class="byFrame" contenteditable="true"></div>
+            </div>
+        </template>
+
+        <template id="txtAndImgTemplate">
+            <div class="txtAndImgContainerDiv">
+                <div class="headlineContainer" contenteditable="true"></div>
+                <div class="imgContainer"><img></div>
+                <div class="txtContainer" contenteditable="true"></div>
+            </div>
+        </template>
+
+        <template id="listSlideTemplate">
+            <div class="listContainerDiv">
+                <div class="liHeadlineContainer" contenteditable="true"></div>
+                <div class="liTextField1" contenteditable="true"><ul><li></li></ul></div>
+                <div class="liTextField2" contenteditable="true"><ul><li></li></ul></div>
+            </div>
+        </template>
+
+    </body>
+    <script>
+
+        const slidePreviewCont = document.getElementById("allSlidesPreviewCont");
+        const editSlideCont = document.getElementById("editSlideCont");
+
+        for(let i = 0; i < 1; i++){
+            let slidePreviewDiv = document.createElement("div");
+            slidePreviewDiv.className = "slidePreview";
+            slidePreviewCont.appendChild(slidePreviewDiv);
+        }
+
+   
+        // ------------- Sets the height and width for the edit slide div-container ---------------
+
+        let bodyHeight = document.body.clientHeight;
+
+        slidePreviewCont.style.height = bodyHeight - 80 - 30; // This sets the height for the div with the slides previews. The heghit is bodyheight-toolbarheight-padding.
+
+        let slideHeight = bodyHeight - 80 - 30;
+        let slideWidth = (slideHeight/9) * 16;
+
+        let slideMaxWidth = document.body.clientWidth - 200;
+        
+        if(slideWidth > slideMaxWidth){
+            slideWidth = slideMaxWidth;
+        }
+
+        slideHeight = (slideWidth/16)*9;
+
+        editSlideCont.style.height = slideHeight;
+        editSlideCont.style.width = slideWidth;
+
+        // -----------------------------------------------------------------------------------------
+
+    </script>
+    <script src="../js/editmode.js"></script>
+</html>
